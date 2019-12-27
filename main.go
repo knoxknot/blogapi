@@ -42,6 +42,17 @@ func getAnArticle(w http.ResponseWriter, r *http.Request) {
 	w.WriteHeader(http.StatusOK)
 }
 
+// implement the creation of an article
+func createAnArticle(w http.ResponseWriter, r *http.Request) {
+	w.Header().Set("Content-Type", "application/json")
+	var newArticle article
+	_ = json.NewDecoder(r.Body).Decode(&newArticle)
+	articles = append(articles, newArticle) //{"ID": "4","Title": "Go: Clean, Readable and Fast","Content": "It is clean in design, easy to read  and outputs very fast."}
+	json.NewEncoder(w).Encode(newArticle)
+	w.WriteHeader(http.StatusCreated)
+	w.Write([]byte(`{"success": "article created"}`))
+}
+
 // program entry point
 func main() {
 	r := mux.NewRouter()
