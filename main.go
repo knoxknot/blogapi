@@ -28,6 +28,20 @@ func getAllArticles(w http.ResponseWriter, r *http.Request) {
 	w.WriteHeader(http.StatusOK)
 }
 
+// implement a single article retrival by id
+func getAnArticle(w http.ResponseWriter, r *http.Request) {
+	w.Header().Set("Content-Type", "application/json")
+	params := mux.Vars(r)
+	for _, article := range articles {
+		if article.ID == params["id"] {
+			json.NewEncoder(w).Encode(article)
+			return	
+		}
+	}
+	json.NewEncoder(w).Encode(&article{})
+	w.WriteHeader(http.StatusOK)
+}
+
 // program entry point
 func main() {
 	r := mux.NewRouter()
