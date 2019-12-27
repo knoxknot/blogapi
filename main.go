@@ -53,6 +53,25 @@ func createAnArticle(w http.ResponseWriter, r *http.Request) {
 	w.Write([]byte(`{"success": "article created"}`))
 }
 
+// implement the updating of a given article by id
+func updateAnArticle(w http.ResponseWriter, r *http.Request){
+	w.Header().Set("Content-Type", "application/json")
+	var updatedArticle article
+	_ = json.NewDecoder(r.Body).Decode(&updatedArticle)
+	params := mux.Vars(r)
+	for index, article := range articles {
+		if article.ID == params["id"] {  
+			updatedArticle.ID = params["id"] 
+			article.Title = updatedArticle.Title
+			article.Content = updatedArticle.Content
+			articles = append(articles[:index], updatedArticle) //{"ID":"4","Title":"Go is Clean and Readable","Content":"It is clean in design, easy to read  and outputs very fast."}
+			json.NewEncoder(w).Encode(updatedArticle)
+			w.WriteHeader(http.StatusAccepted)
+			w.Write([]byte(`{"success": "article updated"}`))
+		}
+	}
+}
+
 // program entry point
 func main() {
 	r := mux.NewRouter()
