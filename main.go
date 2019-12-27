@@ -72,6 +72,19 @@ func updateAnArticle(w http.ResponseWriter, r *http.Request){
 	}
 }
 
+// implements the deletion of a specific article by id
+func deleteAnArticle(w http.ResponseWriter, r *http.Request) {
+	w.Header().Set("Content-Type", "application/json")
+	params := mux.Vars(r)
+	for index, article := range articles {
+		if article.ID == params["id"] {
+			articles = append(articles[:index],articles[index+1:]...)
+		}
+	}
+	json.NewEncoder(w).Encode(&article{})
+	w.WriteHeader(http.StatusOK)
+}
+
 // program entry point
 func main() {
 	r := mux.NewRouter()
