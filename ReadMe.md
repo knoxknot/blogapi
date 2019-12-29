@@ -1,6 +1,6 @@
-# Building a Blog Api in Go  
+# Building a Blog API in Go  
 ---
-This repository describes building a blog api to post, retrieve, update and delete contents.
+This repository describes building a blog API to post, retrieve, update and delete contents.
 
 I have also written an [article](https://medium.com/@nwoyesamuelc/in-memory-data-store-api-development-with-go-49c76518485e) on medium that ties to this repository.
 
