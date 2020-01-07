@@ -46,6 +46,8 @@ metadata:
   name: blogapi-svc
   namespace: default
 spec:
+  externalIPs:
+  - 192.168.255.4
   selector:
     app: blogapi
     tier: backend
