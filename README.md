@@ -6,15 +6,16 @@ Building an Image
 ---
 <code>
 
-### Local Operations
+### For Local Operation
 - docker build . -t blogapi           #build the image
 - docker run -d  -p 8080:8080 --name blogapi blogapi      #run the image
 
-### Remote Operations
+### For Remote Operation
 - TAG=`git tag -l | tail -n1` && echo $TAG    #get the latest project tag
 - docker login    #provide your dockerhub user name and password
-- docker tag blogapi knoxknot/blogapi:$TAG  #tag image for push to repository
+- docker build . -t knoxknot/blogapi:$TAG -t knoxknot/blogapi:latest  #build the image for push to repository
 - docker push  knoxknot/blogapi:$TAG   #push image to repository 
+- docker push  knoxknot/blogapi:latest   
   
 </code>
 
