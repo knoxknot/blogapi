@@ -7,7 +7,6 @@ Building an Image
 change into the blogapi directory  
 **Run**: 
 <code>
-
 ### Local Operations
 - docker build . -t blogapi           #build the image
 - docker run -d  -p 8080:8080 --name blogapi blogapi      #run the image
